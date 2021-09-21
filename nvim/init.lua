@@ -1,3 +1,7 @@
+
+-- This doesn't work in the keymappings section, need to figure out why
+vim.g.mapleader = " " 
+vim.g.maplocalleader = " "
 -- Load the plugins
 require('plug')
 -- Load the plugin configurations
