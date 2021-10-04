@@ -19,7 +19,7 @@ vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.wo.wrap = false
 --------------------------- Keymappings ----------------------------
-vim.g.mapleader = " " 
+vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Vim Settings
@@ -38,7 +38,7 @@ require("nvim-autopairs").setup({
 -- bufferline(tabs)
 require("bufferline").setup{
     options = {
-        separator_style = "slant"	
+        separator_style = "slant"
     }
 }
 -- Telescope
@@ -129,3 +129,93 @@ local on_attach = function(client, bufnr)
         )
     end
 end
+
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+-- Icons in autocomplete menu
+require('lspkind').init({
+    with_text = false,
+    preset = 'codicons',
+})
+-- Setup nvim-cmp.
+-- https://github.com/mjlbach/defaults.nvim/blob/master/init.lua#L284
+local cmp = require 'cmp'
+local lspkind = require 'lspkind'
+cmp.setup {
+    mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = function(fallback)
+            if vim.fn.pumvisible() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+            else
+                fallback()
+            end
+        end,
+        ['<S-Tab>'] = function(fallback)
+            if vim.fn.pumvisible() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+            else
+                fallback()
+            end
+        end,
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'buffer' }
+    },
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.kind = lspkind.presets.default[vim_item.kind]
+            return vim_item
+        end
+    }
+}
+
+-- Lua LSP
+-- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+USER = vim.fn.expand('$USER')
+
+local sumneko_root_path = ""
+local sumneko_binary = ""
+
+if vim.fn.has("mac") == 1 then
+    sumneko_root_path = "/Users/" .. USER .. "/software/lua-language-server"
+    sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
+elseif vim.fn.has("unix") == 1 then
+    sumneko_root_path = "/home/" .. USER .. "/.config/nvim/lua-language-server"
+    sumneko_binary =sumneko_root_path .. "/bin/Linux/lua-language-server"
+else
+    print("Unsupported system for sumneko")
+end
+
+require'lspconfig'.sumneko_lua.setup {
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';')
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'}
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+            }
+        }
+    }
+}
