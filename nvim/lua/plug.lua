@@ -16,6 +16,7 @@ return require('packer').startup(function(use)
     use 'lervag/vimtex'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
 	vim.cmd([[
 	augroup packer_user_config
