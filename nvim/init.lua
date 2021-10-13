@@ -53,6 +53,24 @@ map('n', '<leader>P', '"+P', {noremap = true})
 map('v', '<leader>p', '"+p', {noremap = true})
 map('v', '<leader>P', '"+P', {noremap = true})
 
+-- Sane remaps
+-- Capital Y, yank to end of line like 'D'
+map('n', 'Y', 'yg$', {noremap = true})
+-- Search centered
+map('n', 'n', 'nzzzv', {noremap = true})
+map('n', 'N', 'Nzzzv', {noremap = true})
+-- Line join beginning
+map('n', 'J', 'mzJ`z', {noremap = true})
+-- Undo break points
+map('i', ',', ',<c-g>u',{noremap = true})
+map('i', '.', '.<c-g>u',{noremap = true})
+map('i', '!', '!<c-g>u',{noremap = true})
+map('i', '?', '?<c-g>u',{noremap = true})
+-- Move Selected Text
+map('v', 'J', ':m \'>+1<CR>gv=gv', {noremap = true})
+map('v', 'K', ':m \'<-2<CR>gv=gv', {noremap = true})
+
+
 -- Telescope
 -- Add Telescope keybinds for built ins
 map('n', '<leader>tff', ':Telescope find_files<CR>', {noremap = true})
@@ -219,7 +237,8 @@ require'lspconfig'.sumneko_lua.setup {
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
+                ignoreDir = {".vscode", "~", "/home/bxw002", "lua-language-server", "undodir"},
             }
         }
     },
