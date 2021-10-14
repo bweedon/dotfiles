@@ -259,6 +259,14 @@ require 'lspconfig'.gopls.setup {
                 shadow = true
             },
             staticcheck = true,
+            linksInHover = true,
+            codelens = {
+                generate = true,
+                gc_details = true,
+                regenerate_cgo = true,
+                tidy = true,
+                upgrade_dependency = true
+            }
         },
     },
     on_attach = on_attach,
