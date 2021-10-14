@@ -11,13 +11,14 @@ return require('packer').startup(function(use)
 	use {'hoob3rt/lualine.nvim'}
 	use {'akinsho/nvim-bufferline.lua'}
 	use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
-	use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}	
-	use 'sainnhe/sonokai'
+	use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+    use 'sainnhe/sonokai'
     use 'lervag/vimtex'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
+    use 'preservim/nerdtree'
 	vim.cmd([[
 	augroup packer_user_config
 	autocmd!

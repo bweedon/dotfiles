@@ -78,6 +78,9 @@ map('n', '<leader>tfb', ':Telescope buffers<CR>', {noremap = true})
 map('n', '<leader>tlg', ':Telescope live_grep<CR>', {noremap = true})
 map('n', '<leader>tgf', ':Telescope git_files<CR>', {noremap = true})
 
+--NERDTree
+map('n', '<leader>nt', ':NERDTreeToggle<CR>', {noremap = true})
+
 -- Nvim TreeSitter
 require'nvim-treesitter.configs'.setup {
     highlight = {
