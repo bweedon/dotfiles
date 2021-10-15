@@ -19,6 +19,7 @@ options.hidden = true
 vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.wo.wrap = false
+vim.g.spelllang = 'en'
 --------------------------- Keymappings ----------------------------
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
