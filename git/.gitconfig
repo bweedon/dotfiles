@@ -1,0 +1,47 @@
+# This is Git's per-user configuration file.
+[user]
+    name = Brian Weedon
+    email = bweedon03@gmail.com
+[core]
+    editor = nvim
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = true
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[push]
+    default = current
+[alias]
+    hide = update-index --assume-unchanged
+    skip = update-index --skip-worktree
+    unhide = update-index --no-assume-unchanged
+    unskip = update-index --no-skip-worktree
+    unhide-all = !git ls-files -v | grep "^[[:lower:]]" | cut -c 3- | xargs git update-index --no-assume-unchanged
+    unskip-all = !git ls-files -v | grep '^S' | cut -c3- | xargs git update-index --no-skip-worktree
+    hidden = !git ls-files -v | grep "^[[:lower:]]"
+    skipped = !git ls-files -v | grep '^S' | cut -c3-
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[delta]
+    features = decorations
+[delta "interactive"]
+    keep-plus-minus-markers = false
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+    side-by-side = true
+    line-numbers = true
