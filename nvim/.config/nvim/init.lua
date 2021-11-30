@@ -203,10 +203,6 @@ cmp.setup {
         end,
     },
 }
-require('nvim-autopairs.completion.cmp').setup({
-    map_cr = true,
-    map_complete = true,
-})
 
 -- Lua LSP
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
@@ -261,13 +257,6 @@ require 'lspconfig'.gopls.setup {
             },
             staticcheck = true,
             linksInHover = true,
-            codelens = {
-                generate = true,
-                gc_details = true,
-                regenerate_cgo = true,
-                tidy = true,
-                upgrade_dependency = true
-            }
         },
     },
     on_attach = on_attach,
