@@ -31,6 +31,8 @@
     hidden = !git ls-files -v | grep "^[[:lower:]]"
     skipped = !git ls-files -v | grep '^S' | cut -c3-
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    c = commit
+    st = status
 [delta]
     features = decorations
 [delta "interactive"]
