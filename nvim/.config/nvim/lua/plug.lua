@@ -19,6 +19,8 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/nvim-cmp'
     use 'preservim/nerdtree'
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
 	vim.cmd([[
 	augroup packer_user_config
 	autocmd!

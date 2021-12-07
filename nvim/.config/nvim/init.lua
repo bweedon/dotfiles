@@ -94,6 +94,7 @@ require'nvim-treesitter.configs'.setup {
     },
     ensure_installed = 'maintained',
 }
+
 -- LSP
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
@@ -158,6 +159,11 @@ require('lspkind').init({
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end
+    },
     mapping = {
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -195,7 +201,6 @@ cmp.setup {
 
             vim_item.menu = ({
                 nvim_lsp = '[LSP]',
-                luasnip = '[LuaSnip]',
                 buffer = '[Buffer]',
                 path = '[Path]',
             })[entry.source.name]
@@ -231,6 +236,7 @@ require'lspconfig'.sumneko_lua.setup {
                 -- Setup your lua path
                 path = vim.split(package.path, ';')
             },
+            completion = { callSnippet = "Both" },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
                 globals = {'vim'}
@@ -300,4 +306,15 @@ autocmd BufWritePre *.go lua goimports(1000)
 -- Bash LSP Setup
 require'lspconfig'.bashls.setup{
     on_attach = on_attach,
+}
+
+-- ts/js language
+require'lspconfig'.tsserver.setup{
+    on_attach = on_attach,
+}
+require'lspconfig'.solargraph.setup{
+    on_attach = on_attach,
+    flags = {
+        debounce_text_changes = 150,
+    }
 }
