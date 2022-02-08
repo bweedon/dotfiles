@@ -21,6 +21,7 @@ return require('packer').startup(function(use)
     use 'preservim/nerdtree'
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
+    use 'numToStr/Comment.nvim'
 	vim.cmd([[
 	augroup packer_user_config
 	autocmd!

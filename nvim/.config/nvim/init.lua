@@ -20,6 +20,8 @@ vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.wo.wrap = false
 vim.g.spelllang = 'en'
+options.signcolumn = 'yes'
+vim.opt_global.shortmess:remove("F")
 --------------------------- Keymappings ----------------------------
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -33,6 +35,7 @@ require('plug')
 
 -- Color Theme
 vim.cmd 'colorscheme sonokai'
+
 -- AutoPairs
 require("nvim-autopairs").setup({
     disable_filetype = { "telescopeprompt", "vim" },
@@ -70,7 +73,9 @@ map('i', '?', '?<c-g>u',{noremap = true})
 -- Move Selected Text
 map('v', 'J', ':m \'>+1<CR>gv=gv', {noremap = true})
 map('v', 'K', ':m \'<-2<CR>gv=gv', {noremap = true})
-
+-- Navigate buffer/tabs
+map('n', '<leader>bp', ':bp<CR>', {noremap = true})
+map('n', '<leader>bn', ':bn<CR>', {noremap = true})
 
 -- Telescope
 -- Add Telescope keybinds for built ins
@@ -94,6 +99,9 @@ require'nvim-treesitter.configs'.setup {
     },
     ensure_installed = 'maintained',
 }
+
+--comment.nvim
+require('Comment').setup()
 
 -- LSP
 local on_attach = function(client, bufnr)

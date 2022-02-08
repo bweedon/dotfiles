@@ -13,6 +13,7 @@
     diffFilter = delta --color-only --features=interactive
 [diff]
     tool = nvimdiff
+	colorMoved = zebra
 [difftool]
     prompt = true
 [difftool "default-difftool"]
@@ -47,3 +48,5 @@
     hunk-header-style = file line-number syntax
     side-by-side = true
     line-numbers = true
+[fetch]
+	prune = true
