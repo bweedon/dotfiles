@@ -159,8 +159,48 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Icons in autocomplete menu
 require('lspkind').init({
-    with_text = false,
+     -- defines how annotations are shown
+    -- default: symbol
+    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+    mode = 'symbol_text',
+
+    -- default symbol map
+    -- can be either 'default' (requires nerd-fonts font) or
+    -- 'codicons' for codicon preset (requires vscode-codicons font)
+    --
+    -- default: 'default'
     preset = 'codicons',
+
+    -- override preset symbols
+    --
+    -- default: {}
+    symbol_map = {
+      Text = "",
+      Method = "",
+      Function = "",
+      Constructor = "",
+      Field = "ﰠ",
+      Variable = "",
+      Class = "ﴯ",
+      Interface = "",
+      Module = "",
+      Property = "ﰠ",
+      Unit = "塞",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "פּ",
+      Event = "",
+      Operator = "",
+      TypeParameter = ""
+    }
 })
 -- Setup nvim-cmp.
 -- https://github.com/mjlbach/defaults.nvim/blob/master/init.lua#L284
@@ -259,6 +299,7 @@ require'lspconfig'.sumneko_lua.setup {
     on_attach = on_attach,
 
 }
+
 -- Go LSP Setup
 require 'lspconfig'.gopls.setup {
     cmd = {"gopls", "--remote=auto"},
@@ -270,7 +311,6 @@ require 'lspconfig'.gopls.setup {
                 shadow = true
             },
             staticcheck = true,
-            linksInHover = true,
         },
     },
     on_attach = on_attach,
