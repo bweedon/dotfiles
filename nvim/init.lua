@@ -28,6 +28,8 @@ vim.g.maplocalleader = " "
 
 -- Vim Settings
 vim.wo.number = true
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
 
 --------------------------- Plugins ---------------------------------
 -- Load the plugins
@@ -83,6 +85,7 @@ map('n', '<leader>tff', ':Telescope find_files<CR>', {noremap = true})
 map('n', '<leader>tfb', ':Telescope buffers<CR>', {noremap = true})
 map('n', '<leader>tlg', ':Telescope live_grep<CR>', {noremap = true})
 map('n', '<leader>tgf', ':Telescope git_files<CR>', {noremap = true})
+map('n', '<leader>tgf', ':Telescope diagnostics<CR>', {noremap = true})
 
 --NERDTree
 map('n', '<leader>nt', ':NERDTreeToggle<CR>', {noremap = true})
@@ -242,6 +245,7 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path'},
+        { name = 'spell'},
     },
     formatting = {
         format = function(entry, vim_item)
